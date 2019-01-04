@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamer.portal.generator.dao.RoleMapper">
+  <resultMap id="BaseResultMap" type="com.dreamer.portal.generator.entity.Role">
+    <id column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="role_name" jdbcType="VARCHAR" property="roleName" />
+    <result column="detail" jdbcType="VARCHAR" property="detail" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="show_order" jdbcType="INTEGER" property="showOrder" />
+    <result column="role_auth" jdbcType="VARCHAR" property="roleAuth" />
+    <result column="operate_user" jdbcType="VARCHAR" property="operateUser" />
+    <result column="operate_date" jdbcType="DATE" property="operateDate" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="sys_id" jdbcType="VARCHAR" property="sysId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    role_id, role_name, detail, status, show_order, role_auth, operate_user, operate_date, 
+    remark, sys_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from D_ROLE
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from D_ROLE
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dreamer.portal.generator.entity.Role">
+    <selectKey keyProperty="roleId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
+    insert into D_ROLE (role_id, role_name, detail, 
+      status, show_order, role_auth, 
+      operate_user, operate_date, remark, 
+      sys_id)
+    values (#{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{showOrder,jdbcType=INTEGER}, #{roleAuth,jdbcType=VARCHAR}, 
+      #{operateUser,jdbcType=VARCHAR}, #{operateDate,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}, 
+      #{sysId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dreamer.portal.generator.entity.Role">
+    <selectKey keyProperty="roleId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
+    insert into D_ROLE
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      role_id,
+      <if test="roleName != null">
+        role_name,
+      </if>
+      <if test="detail != null">
+        detail,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="showOrder != null">
+        show_order,
+      </if>
+      <if test="roleAuth != null">
+        role_auth,
+      </if>
+      <if test="operateUser != null">
+        operate_user,
+      </if>
+      <if test="operateDate != null">
+        operate_date,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="sysId != null">
+        sys_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{roleId,jdbcType=VARCHAR},
+      <if test="roleName != null">
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="showOrder != null">
+        #{showOrder,jdbcType=INTEGER},
+      </if>
+      <if test="roleAuth != null">
+        #{roleAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="operateUser != null">
+        #{operateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null">
+        #{operateDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sysId != null">
+        #{sysId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dreamer.portal.generator.entity.Role">
+    update D_ROLE
+    <set>
+      <if test="roleName != null">
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="showOrder != null">
+        show_order = #{showOrder,jdbcType=INTEGER},
+      </if>
+      <if test="roleAuth != null">
+        role_auth = #{roleAuth,jdbcType=VARCHAR},
+      </if>
+      <if test="operateUser != null">
+        operate_user = #{operateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null">
+        operate_date = #{operateDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="sysId != null">
+        sys_id = #{sysId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dreamer.portal.generator.entity.Role">
+    update D_ROLE
+    set role_name = #{roleName,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      show_order = #{showOrder,jdbcType=INTEGER},
+      role_auth = #{roleAuth,jdbcType=VARCHAR},
+      operate_user = #{operateUser,jdbcType=VARCHAR},
+      operate_date = #{operateDate,jdbcType=DATE},
+      remark = #{remark,jdbcType=VARCHAR},
+      sys_id = #{sysId,jdbcType=VARCHAR}
+    where role_id = #{roleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

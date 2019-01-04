@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamer.portal.generator.dao.SysMapper">
+  <resultMap id="BaseResultMap" type="com.dreamer.portal.generator.entity.Sys">
+    <id column="sys_id" jdbcType="VARCHAR" property="sysId" />
+    <result column="abbr_name" jdbcType="VARCHAR" property="abbrName" />
+    <result column="full_name" jdbcType="VARCHAR" property="fullName" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="detail" jdbcType="VARCHAR" property="detail" />
+    <result column="sys_icon" jdbcType="VARCHAR" property="sysIcon" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="operate_user" jdbcType="VARCHAR" property="operateUser" />
+    <result column="operate_date" jdbcType="DATE" property="operateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sys_id, abbr_name, full_name, url, detail, sys_icon, remark, operate_user, operate_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from D_SYS
+    where sys_id = #{sysId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from D_SYS
+    where sys_id = #{sysId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dreamer.portal.generator.entity.Sys">
+    <selectKey keyProperty="sysId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
+    insert into D_SYS (sys_id, abbr_name, full_name, 
+      url, detail, sys_icon, 
+      remark, operate_user, operate_date
+      )
+    values (#{sysId,jdbcType=VARCHAR}, #{abbrName,jdbcType=VARCHAR}, #{fullName,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{detail,jdbcType=VARCHAR}, #{sysIcon,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{operateUser,jdbcType=VARCHAR}, #{operateDate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dreamer.portal.generator.entity.Sys">
+    <selectKey keyProperty="sysId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
+    insert into D_SYS
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      sys_id,
+      <if test="abbrName != null">
+        abbr_name,
+      </if>
+      <if test="fullName != null">
+        full_name,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="detail != null">
+        detail,
+      </if>
+      <if test="sysIcon != null">
+        sys_icon,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="operateUser != null">
+        operate_user,
+      </if>
+      <if test="operateDate != null">
+        operate_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{sysId,jdbcType=VARCHAR},
+      <if test="abbrName != null">
+        #{abbrName,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null">
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="sysIcon != null">
+        #{sysIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operateUser != null">
+        #{operateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null">
+        #{operateDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dreamer.portal.generator.entity.Sys">
+    update D_SYS
+    <set>
+      <if test="abbrName != null">
+        abbr_name = #{abbrName,jdbcType=VARCHAR},
+      </if>
+      <if test="fullName != null">
+        full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="sysIcon != null">
+        sys_icon = #{sysIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operateUser != null">
+        operate_user = #{operateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null">
+        operate_date = #{operateDate,jdbcType=DATE},
+      </if>
+    </set>
+    where sys_id = #{sysId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dreamer.portal.generator.entity.Sys">
+    update D_SYS
+    set abbr_name = #{abbrName,jdbcType=VARCHAR},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      sys_icon = #{sysIcon,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      operate_user = #{operateUser,jdbcType=VARCHAR},
+      operate_date = #{operateDate,jdbcType=DATE}
+    where sys_id = #{sysId,jdbcType=VARCHAR}
+  </update>
+</mapper>

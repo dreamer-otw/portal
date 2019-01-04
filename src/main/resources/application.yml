@@ -1,0 +1,27 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dreamer_portal?useSSL=false&serverTimezone=UTC
+    username: root
+    password: 654321
+#    driver-class-name: oracle.jdbc.driver.OracleDriver
+#    url: jdbc:oracle:thin:@localhost:1521:orcl
+#    username: basic
+#    password: 123456
+    druid:
+      min-idle: 5
+      max-active: 15
+      initial-size: 2
+      min-evictable-idle-time-millis: 300000
+      max-wait: 60000
+mybatis:
+  mapper-locations: classpath*:com/dreamer/portal/**/mapping/*.xml
+#  dialect: org.apache.ibatis.dialect.OracleDialect
+  dialect: cn.org.rapid_framework.jdbc.dialect.MySQLDialect
+  bbase-package: com.dreamer.portal.**.dao
+  aliases-package: com.dreamer.portal.**.entity,com.dreamer.portal.**.data
+  underscore-to-camel-case: true
+############################# 分割线 #############################

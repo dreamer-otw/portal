@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamer.portal.generator.dao.OrgMapper">
+  <resultMap id="BaseResultMap" type="com.dreamer.portal.generator.entity.Org">
+    <id column="org_id" jdbcType="VARCHAR" property="orgId" />
+    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="org_level" jdbcType="VARCHAR" property="orgLevel" />
+    <result column="org_type" jdbcType="VARCHAR" property="orgType" />
+    <result column="province_id" jdbcType="VARCHAR" property="provinceId" />
+    <result column="city_id" jdbcType="VARCHAR" property="cityId" />
+    <result column="area_id" jdbcType="VARCHAR" property="areaId" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="operate_date" jdbcType="DATE" property="operateDate" />
+    <result column="operate_user" jdbcType="VARCHAR" property="operateUser" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    org_id, org_name, parent_id, org_level, org_type, province_id, city_id, area_id, 
+    address, status, operate_date, operate_user, remark
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from D_ORG
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from D_ORG
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dreamer.portal.generator.entity.Org">
+    <selectKey keyProperty="orgId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
+    insert into D_ORG (org_id, org_name, parent_id, 
+      org_level, org_type, province_id, 
+      city_id, area_id, address, 
+      status, operate_date, operate_user, 
+      remark)
+    values (#{orgId,jdbcType=VARCHAR}, #{orgName,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{orgLevel,jdbcType=VARCHAR}, #{orgType,jdbcType=VARCHAR}, #{provinceId,jdbcType=VARCHAR}, 
+      #{cityId,jdbcType=VARCHAR}, #{areaId,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{operateDate,jdbcType=DATE}, #{operateUser,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dreamer.portal.generator.entity.Org">
+    <selectKey keyProperty="orgId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
+    insert into D_ORG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      org_id,
+      <if test="orgName != null">
+        org_name,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="orgLevel != null">
+        org_level,
+      </if>
+      <if test="orgType != null">
+        org_type,
+      </if>
+      <if test="provinceId != null">
+        province_id,
+      </if>
+      <if test="cityId != null">
+        city_id,
+      </if>
+      <if test="areaId != null">
+        area_id,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="operateDate != null">
+        operate_date,
+      </if>
+      <if test="operateUser != null">
+        operate_user,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{orgId,jdbcType=VARCHAR},
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLevel != null">
+        #{orgLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null">
+        #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null">
+        #{operateDate,jdbcType=DATE},
+      </if>
+      <if test="operateUser != null">
+        #{operateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dreamer.portal.generator.entity.Org">
+    update D_ORG
+    <set>
+      <if test="orgName != null">
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgLevel != null">
+        org_level = #{orgLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="orgType != null">
+        org_type = #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null">
+        province_id = #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null">
+        area_id = #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null">
+        operate_date = #{operateDate,jdbcType=DATE},
+      </if>
+      <if test="operateUser != null">
+        operate_user = #{operateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dreamer.portal.generator.entity.Org">
+    update D_ORG
+    set org_name = #{orgName,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      org_level = #{orgLevel,jdbcType=VARCHAR},
+      org_type = #{orgType,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      operate_date = #{operateDate,jdbcType=DATE},
+      operate_user = #{operateUser,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR}
+    where org_id = #{orgId,jdbcType=VARCHAR}
+  </update>
+</mapper>

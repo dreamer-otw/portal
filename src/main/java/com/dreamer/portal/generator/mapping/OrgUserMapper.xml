@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamer.portal.generator.dao.OrgUserMapper">
+  <resultMap id="BaseResultMap" type="com.dreamer.portal.generator.entity.OrgUser">
+    <id column="relation_id" jdbcType="VARCHAR" property="relationId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="org_id" jdbcType="VARCHAR" property="orgId" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="job_title" jdbcType="VARCHAR" property="jobTitle" />
+    <result column="operate_date" jdbcType="DATE" property="operateDate" />
+    <result column="operate_user" jdbcType="VARCHAR" property="operateUser" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    relation_id, user_id, org_id, level, job_title, operate_date, operate_user
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from D_ORG_USER
+    where relation_id = #{relationId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from D_ORG_USER
+    where relation_id = #{relationId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dreamer.portal.generator.entity.OrgUser">
+    <selectKey keyProperty="relationId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
+    insert into D_ORG_USER (relation_id, user_id, org_id, 
+      level, job_title, operate_date, 
+      operate_user)
+    values (#{relationId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, 
+      #{level,jdbcType=VARCHAR}, #{jobTitle,jdbcType=VARCHAR}, #{operateDate,jdbcType=DATE}, 
+      #{operateUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dreamer.portal.generator.entity.OrgUser">
+    <selectKey keyProperty="relationId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
+    insert into D_ORG_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      relation_id,
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="orgId != null">
+        org_id,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="jobTitle != null">
+        job_title,
+      </if>
+      <if test="operateDate != null">
+        operate_date,
+      </if>
+      <if test="operateUser != null">
+        operate_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{relationId,jdbcType=VARCHAR},
+      <if test="userId != null">
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="jobTitle != null">
+        #{jobTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null">
+        #{operateDate,jdbcType=DATE},
+      </if>
+      <if test="operateUser != null">
+        #{operateUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dreamer.portal.generator.entity.OrgUser">
+    update D_ORG_USER
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="orgId != null">
+        org_id = #{orgId,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="jobTitle != null">
+        job_title = #{jobTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null">
+        operate_date = #{operateDate,jdbcType=DATE},
+      </if>
+      <if test="operateUser != null">
+        operate_user = #{operateUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where relation_id = #{relationId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dreamer.portal.generator.entity.OrgUser">
+    update D_ORG_USER
+    set user_id = #{userId,jdbcType=VARCHAR},
+      org_id = #{orgId,jdbcType=VARCHAR},
+      level = #{level,jdbcType=VARCHAR},
+      job_title = #{jobTitle,jdbcType=VARCHAR},
+      operate_date = #{operateDate,jdbcType=DATE},
+      operate_user = #{operateUser,jdbcType=VARCHAR}
+    where relation_id = #{relationId,jdbcType=VARCHAR}
+  </update>
+</mapper>

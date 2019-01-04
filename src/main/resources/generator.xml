@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="my" targetRuntime="MyBatis3">
+
+        <!--自动实现Serializable接口-->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+
+        <!-- 去除自动生成的注释 -->
+        <commentGenerator>
+            <property name="suppressAllComments" value="true" />
+            <property name="javaFileEncoding" value="utf-8"/>
+        </commentGenerator>
+
+        <!--数据库基本信息-->
+        <!--<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+                        connectionURL="jdbc:oracle:thin:@localhost:1521:orcl"
+                        userId="basic"
+                        password="123456">
+        </jdbcConnection>-->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/dreamer_portal?characterEncoding=utf8"
+                        userId="root"
+                        password="654321" />
+
+        <!--生成实体类的位置以及包的名字-->
+        <!--同样Mac用户：targetProject 为全路径-->
+        <javaModelGenerator targetPackage="com.dreamer.portal.generator.entity" targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="true" />
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--生成映射文件存放位置-->
+        <!--同样Mac用户：targetProject 为全路径-->
+        <sqlMapGenerator targetPackage="com.dreamer.portal.generator.mapping" targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!--生成Dao类存放位置,mapper接口生成的位置-->
+        <!--同样Mac用户：targetProject 为全路径-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.dreamer.portal.generator.dao" targetProject="src/main/java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!-- 配置表信息 -->
+        <!-- schema即为数据库名 tableName为对应的数据库表 domainObjectName是要生成的实体类 enable*ByExample
+            是否生成 example类 -->
+        <table tableName="D_USER"
+               domainObjectName="User" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="USER_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
+        </table>
+        <table tableName="D_BUTTON"
+               domainObjectName="Button" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="BUTTON_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
+        </table>
+        <table tableName="D_DICT"
+               domainObjectName="Dict" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="DICT_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
+        </table>
+
+        <table tableName="D_MENU"
+               domainObjectName="Menu" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="MENU_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
+        </table>
+        <table tableName="D_ORG"
+               domainObjectName="Org" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="ORG_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
+        </table>
+        <table tableName="D_ORG_USER"
+               domainObjectName="OrgUser" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="RELATION_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
+        </table>
+        <table tableName="D_ROLE"
+               domainObjectName="Role" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="ROLE_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
+        </table>
+        <table tableName="D_SYS"
+               domainObjectName="Sys" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="SYS_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
+        </table>
+        <table tableName="D_USER_SYS_ROLE"
+               domainObjectName="UserSysRole" enableCountByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               enableUpdateByExample="false">
+            <property name="ignoreQualifiersAtRuntime" value="true"/>
+            <generatedKey column="RELATION_ID" sqlStatement="select sys_guid() from dual" identity="false"/>
+        </table>
+
+        <!-- sql占位符，表示所有的表 -->
+        <!--<table tableName="%">
+            <generatedKey column="epa_id" sqlStatement="Mysql" identity="true" />
+        </table>-->
+    </context>
+</generatorConfiguration>

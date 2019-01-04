@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamer.portal.dao.UserDao">
+    <resultMap id="BaseResultMap" type="com.dreamer.portal.generator.entity.User">
+        <id column="user_id" jdbcType="VARCHAR" property="userId" />
+        <result column="user_alias" jdbcType="VARCHAR" property="userAlias" />
+        <result column="user_name" jdbcType="VARCHAR" property="userName" />
+        <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
+        <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+        <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+        <result column="user_admin" jdbcType="VARCHAR" property="userAdmin" />
+        <result column="user_type" jdbcType="VARCHAR" property="userType" />
+        <result column="status" jdbcType="VARCHAR" property="status" />
+        <result column="remark" jdbcType="VARCHAR" property="remark" />
+        <result column="operate_user" jdbcType="VARCHAR" property="operateUser" />
+        <result column="operate_date" jdbcType="DATE" property="operateDate" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        user_id, user_alias, user_name, user_pwd, user_phone, user_email, user_admin, user_type,
+        status, remark, operate_user, operate_date
+    </sql>
+    <select id="selectByUserName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from D_USER
+        where user_name = #{userName,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

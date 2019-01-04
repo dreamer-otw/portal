@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamer.portal.generator.dao.DictMapper">
+  <resultMap id="BaseResultMap" type="com.dreamer.portal.generator.entity.Dict">
+    <id column="dict_id" jdbcType="VARCHAR" property="dictId" />
+    <result column="dict_code" jdbcType="VARCHAR" property="dictCode" />
+    <result column="dict_name" jdbcType="VARCHAR" property="dictName" />
+    <result column="d_dictcol" jdbcType="VARCHAR" property="dDictcol" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    dict_id, dict_code, dict_name, d_dictcol
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from D_DICT
+    where dict_id = #{dictId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from D_DICT
+    where dict_id = #{dictId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dreamer.portal.generator.entity.Dict">
+    <selectKey keyProperty="dictId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
+    insert into D_DICT (dict_id, dict_code, dict_name, 
+      d_dictcol)
+    values (#{dictId,jdbcType=VARCHAR}, #{dictCode,jdbcType=VARCHAR}, #{dictName,jdbcType=VARCHAR}, 
+      #{dDictcol,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dreamer.portal.generator.entity.Dict">
+    <selectKey keyProperty="dictId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
+    insert into D_DICT
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      dict_id,
+      <if test="dictCode != null">
+        dict_code,
+      </if>
+      <if test="dictName != null">
+        dict_name,
+      </if>
+      <if test="dDictcol != null">
+        d_dictcol,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{dictId,jdbcType=VARCHAR},
+      <if test="dictCode != null">
+        #{dictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictName != null">
+        #{dictName,jdbcType=VARCHAR},
+      </if>
+      <if test="dDictcol != null">
+        #{dDictcol,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dreamer.portal.generator.entity.Dict">
+    update D_DICT
+    <set>
+      <if test="dictCode != null">
+        dict_code = #{dictCode,jdbcType=VARCHAR},
+      </if>
+      <if test="dictName != null">
+        dict_name = #{dictName,jdbcType=VARCHAR},
+      </if>
+      <if test="dDictcol != null">
+        d_dictcol = #{dDictcol,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dict_id = #{dictId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dreamer.portal.generator.entity.Dict">
+    update D_DICT
+    set dict_code = #{dictCode,jdbcType=VARCHAR},
+      dict_name = #{dictName,jdbcType=VARCHAR},
+      d_dictcol = #{dDictcol,jdbcType=VARCHAR}
+    where dict_id = #{dictId,jdbcType=VARCHAR}
+  </update>
+</mapper>

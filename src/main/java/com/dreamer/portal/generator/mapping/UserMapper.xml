@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamer.portal.generator.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.dreamer.portal.generator.entity.User">
+    <id column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="user_alias" jdbcType="VARCHAR" property="userAlias" />
+    <result column="user_name" jdbcType="VARCHAR" property="userName" />
+    <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="user_email" jdbcType="VARCHAR" property="userEmail" />
+    <result column="user_admin" jdbcType="VARCHAR" property="userAdmin" />
+    <result column="user_type" jdbcType="VARCHAR" property="userType" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="operate_user" jdbcType="VARCHAR" property="operateUser" />
+    <result column="operate_date" jdbcType="DATE" property="operateDate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, user_alias, user_name, user_pwd, user_phone, user_email, user_admin, user_type, 
+    status, remark, operate_user, operate_date
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from D_USER
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from D_USER
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dreamer.portal.generator.entity.User">
+    <selectKey keyProperty="userId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
+    insert into D_USER (user_id, user_alias, user_name, 
+      user_pwd, user_phone, user_email, 
+      user_admin, user_type, status, 
+      remark, operate_user, operate_date
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{userAlias,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{userPwd,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, 
+      #{userAdmin,jdbcType=VARCHAR}, #{userType,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{operateUser,jdbcType=VARCHAR}, #{operateDate,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dreamer.portal.generator.entity.User">
+    <selectKey keyProperty="userId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
+    insert into D_USER
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      user_id,
+      <if test="userAlias != null">
+        user_alias,
+      </if>
+      <if test="userName != null">
+        user_name,
+      </if>
+      <if test="userPwd != null">
+        user_pwd,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="userEmail != null">
+        user_email,
+      </if>
+      <if test="userAdmin != null">
+        user_admin,
+      </if>
+      <if test="userType != null">
+        user_type,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="operateUser != null">
+        operate_user,
+      </if>
+      <if test="operateDate != null">
+        operate_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{userId,jdbcType=VARCHAR},
+      <if test="userAlias != null">
+        #{userAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userAdmin != null">
+        #{userAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operateUser != null">
+        #{operateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null">
+        #{operateDate,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dreamer.portal.generator.entity.User">
+    update D_USER
+    <set>
+      <if test="userAlias != null">
+        user_alias = #{userAlias,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null">
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPwd != null">
+        user_pwd = #{userPwd,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="userEmail != null">
+        user_email = #{userEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="userAdmin != null">
+        user_admin = #{userAdmin,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null">
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="operateUser != null">
+        operate_user = #{operateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null">
+        operate_date = #{operateDate,jdbcType=DATE},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dreamer.portal.generator.entity.User">
+    update D_USER
+    set user_alias = #{userAlias,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      user_pwd = #{userPwd,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      user_email = #{userEmail,jdbcType=VARCHAR},
+      user_admin = #{userAdmin,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      operate_user = #{operateUser,jdbcType=VARCHAR},
+      operate_date = #{operateDate,jdbcType=DATE}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

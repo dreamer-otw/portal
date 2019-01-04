@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dreamer.portal.generator.dao.MenuMapper">
+  <resultMap id="BaseResultMap" type="com.dreamer.portal.generator.entity.Menu">
+    <id column="menu_id" jdbcType="VARCHAR" property="menuId" />
+    <result column="menu_name" jdbcType="VARCHAR" property="menuName" />
+    <result column="menu_url" jdbcType="VARCHAR" property="menuUrl" />
+    <result column="detail" jdbcType="VARCHAR" property="detail" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="prarent_id" jdbcType="VARCHAR" property="prarentId" />
+    <result column="show_order" jdbcType="INTEGER" property="showOrder" />
+    <result column="menu_icon" jdbcType="VARCHAR" property="menuIcon" />
+    <result column="operate_user" jdbcType="VARCHAR" property="operateUser" />
+    <result column="operate_date" jdbcType="DATE" property="operateDate" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    menu_id, menu_name, menu_url, detail, status, prarent_id, show_order, menu_icon, 
+    operate_user, operate_date, remark, role_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from D_MENU
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from D_MENU
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.dreamer.portal.generator.entity.Menu">
+    <selectKey keyProperty="menuId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
+    insert into D_MENU (menu_id, menu_name, menu_url, 
+      detail, status, prarent_id, 
+      show_order, menu_icon, operate_user, 
+      operate_date, remark, role_id
+      )
+    values (#{menuId,jdbcType=VARCHAR}, #{menuName,jdbcType=VARCHAR}, #{menuUrl,jdbcType=VARCHAR}, 
+      #{detail,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{prarentId,jdbcType=VARCHAR}, 
+      #{showOrder,jdbcType=INTEGER}, #{menuIcon,jdbcType=VARCHAR}, #{operateUser,jdbcType=VARCHAR}, 
+      #{operateDate,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}, #{roleId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.dreamer.portal.generator.entity.Menu">
+    <selectKey keyProperty="menuId" order="BEFORE" resultType="java.lang.String">
+      select sys_guid() from dual
+    </selectKey>
+    insert into D_MENU
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      menu_id,
+      <if test="menuName != null">
+        menu_name,
+      </if>
+      <if test="menuUrl != null">
+        menu_url,
+      </if>
+      <if test="detail != null">
+        detail,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="prarentId != null">
+        prarent_id,
+      </if>
+      <if test="showOrder != null">
+        show_order,
+      </if>
+      <if test="menuIcon != null">
+        menu_icon,
+      </if>
+      <if test="operateUser != null">
+        operate_user,
+      </if>
+      <if test="operateDate != null">
+        operate_date,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{menuId,jdbcType=VARCHAR},
+      <if test="menuName != null">
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="prarentId != null">
+        #{prarentId,jdbcType=VARCHAR},
+      </if>
+      <if test="showOrder != null">
+        #{showOrder,jdbcType=INTEGER},
+      </if>
+      <if test="menuIcon != null">
+        #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="operateUser != null">
+        #{operateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null">
+        #{operateDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dreamer.portal.generator.entity.Menu">
+    update D_MENU
+    <set>
+      <if test="menuName != null">
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null">
+        menu_url = #{menuUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="detail != null">
+        detail = #{detail,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="prarentId != null">
+        prarent_id = #{prarentId,jdbcType=VARCHAR},
+      </if>
+      <if test="showOrder != null">
+        show_order = #{showOrder,jdbcType=INTEGER},
+      </if>
+      <if test="menuIcon != null">
+        menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="operateUser != null">
+        operate_user = #{operateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="operateDate != null">
+        operate_date = #{operateDate,jdbcType=DATE},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dreamer.portal.generator.entity.Menu">
+    update D_MENU
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=VARCHAR},
+      detail = #{detail,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      prarent_id = #{prarentId,jdbcType=VARCHAR},
+      show_order = #{showOrder,jdbcType=INTEGER},
+      menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      operate_user = #{operateUser,jdbcType=VARCHAR},
+      operate_date = #{operateDate,jdbcType=DATE},
+      remark = #{remark,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=VARCHAR}
+    where menu_id = #{menuId,jdbcType=VARCHAR}
+  </update>
+</mapper>
